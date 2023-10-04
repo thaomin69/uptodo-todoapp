@@ -1,0 +1,13 @@
+body{
+    font-family: 'Lato', sans-serif;
+}
+body.no-scroll {
+  overflow: hidden;
+}
+
+.container{
+    background: var(--BG-Color, #121212);   
+    width: 23.4375rem;
+    height: 50.75rem fixed;
+    margin: 0 auto;
+}
