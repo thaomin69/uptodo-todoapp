@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import styles from '../styles/home.module.scss';
-import Task from '../components/Task';
-import axios from 'axios';
-import DeleteModalProps from '../components/DeleteModal';
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import styles from "../styles/home.module.scss";
+import Task from "../components/Task";
+import axios from "axios";
+import DeleteModalProps from "../components/DeleteModal";
+import { AddModal } from "../components/AddModal";
 
 // Define a type for tasks
-interface TaskType {
+export interface TaskType {
   id: number;
   todo: string;
   completed: boolean;
 }
 
-export default function Index() {
+export default function Index({
+  onAddModalClose,
+}: {
+  onAddModalClose: () => void;
+}) {
   // Khai báo trạng thái và danh sách tasks
-  const [tasks, setTasks] = useState<TaskType[]>([]);
   const [completedTasks, setCompletedTasks] = useState<TaskType[]>([]);
   const [incompleteTasks, setIncompleteTasks] = useState<TaskType[]>([]);
 
@@ -38,11 +42,33 @@ export default function Index() {
       });
   }, []); // Empty dependency array ensures the API call only happens once on component mount
 
-
   const handleDeleteTask = (taskId: number) => {
-    // Xóa task từ state (hoặc bạn có thể gọi API lần nữa để cập nhật danh sách tasks)
-    setTasks(tasks.filter((task) => task.id !== taskId));
-    setShowModal(false); // Đóng modal
+    setIncompleteTasks(incompleteTasks.filter((task) => task.id !== taskId));
+    setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
+  };
+
+  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false);
+
+  const handleAddButtonClick = () => {
+    setIsAddTaskModalOpen(true);
+  };
+
+  const handleAddNewTask = (title: string) => {
+    axios
+      .post("https://dummyjson.com/todos/add", {
+        todo: title,
+        completed: false,
+        userId: 1,
+      })
+      .then((response) => {
+        const newTask: TaskType = response.data;
+        setIncompleteTasks([...incompleteTasks, newTask]);
+        setIsAddTaskModalOpen(false);
+        onAddModalClose();
+      })
+      .catch((error) => {
+        console.error("Error adding task:", error);
+      });
   };
 
   return (
@@ -66,7 +92,7 @@ export default function Index() {
               key={task.id}
               id={task.id}
               title={task.todo}
-              time="10:00 AM"
+              time="Today At 10:00 AM"
               completed={false}
               onDelete={handleDeleteTask}
             />
@@ -91,7 +117,7 @@ export default function Index() {
               key={task.id}
               id={task.id}
               title={task.todo}
-              time="10:00 AM"
+              time="Today At 10:00 AM"
               completed={true}
               onDelete={handleDeleteTask}
             />
@@ -107,6 +133,12 @@ export default function Index() {
           />
         )}
       </div>
+      {isAddTaskModalOpen && (
+        <AddModal
+          onAdd={handleAddNewTask}
+          onCancel={() => setIsAddTaskModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

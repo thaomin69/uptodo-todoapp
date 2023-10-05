@@ -1,11 +1,17 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '../styles/Footer.module.scss';
+import React, { useState } from "react";
+import Image from "next/image";
+import styles from "../styles/Footer.module.scss";
+// import AddModal from "./AddModal";
+import { AddModal } from "./AddModal";
 
-export default function Footer() {
+interface FooterProps {
+  onAddClick: () => void;
+}
+
+export default function Footer({ onAddClick }: { onAddClick: () => void }) {
+  
   return (
     <footer className={styles.footer}>
-
       {/* BEGIN: Icon left */}
       <div className={styles.iconsLeft}>
         <div className={styles.icon}>
@@ -13,21 +19,22 @@ export default function Footer() {
           <p>Index</p>
         </div>
         <div className={styles.icon}>
-          <Image src="/icon/calendar.svg" alt="Calendar" width={24} height={24} />
+          <Image
+            src="/icon/calendar.svg"
+            alt="Calendar"
+            width={24}
+            height={24}
+          />
           <p>Calendar</p>
         </div>
       </div>
       {/* END: Icon left */}
 
       {/* BEGIN: Add button */}
-      <div className={styles.addButton}>
-        <Image
-          src="/icon/add.svg"
-          alt="add button"
-          width={40}
-          height={40}
-        />
+      <div className={styles.addButton} onClick={onAddClick}>
+        <Image src="/icon/add.svg" alt="add button" width={40} height={40} />
       </div>
+
       {/* END: Add button */}
 
       {/* BEGIN: Icon right */}
@@ -42,7 +49,6 @@ export default function Footer() {
         </div>
       </div>
       {/* END: Icon right */}
-
     </footer>
   );
 }

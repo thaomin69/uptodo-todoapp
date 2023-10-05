@@ -25,28 +25,24 @@ const Task: React.FC<TaskProps> = ({ id, title, time, onDelete }) => {
     }
   };
 
-  const [taskTitle, setTitle] = useState(title);
   const handleEditTask = (newTitle: string) => {
-    setTitle(newTitle);
+    // TODO: Bạn có thể cập nhật tiêu đề công việc ở đây nếu cần.
     handleToggleModal("edit");
   };
 
   return (
     <div className={styles.task}>
-      <div className={styles.wrapper}>
-        <Image
-          src="/icon/circle.svg"
-          alt="circle icon"
-          width={16}
-          height={16}
-          className={styles.iconCheck}
-        />
-        <div className={styles.taskDetails}>
-          <p className={styles.title}>{taskTitle}</p>
-          <p className={styles.time}>{time}</p>
-        </div>
+      <Image
+        src="/icon/circle.svg"
+        alt="circle icon"
+        width={16}
+        height={16}
+        className={styles.iconCheck}
+      />
+      <div className={styles.taskDetails}>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.time}>{time}</p>
       </div>
-
       <div className={styles.taskActions}>
         <Image
           src="/icon/edit.svg"

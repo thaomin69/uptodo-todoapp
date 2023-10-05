@@ -36,7 +36,7 @@ const DeleteModalProps: React.FC<DeleteModalProps> = ({
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>Delete Task</h2>
+        <h2 className={styles.titleModal}>Delete Task</h2>
         <Image
           src="/icon/divider.svg"
           alt="divider"
@@ -44,10 +44,15 @@ const DeleteModalProps: React.FC<DeleteModalProps> = ({
           height={24}
           className={styles.divider}
         />
-        <p>Are You sure you want to delete this task?</p>
-        <p>Task title: {taskTitle}</p>
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={handleDelete}>Delete</button>
+        <div className={styles.wrapper}>
+          <p>Are You sure you want to delete this task?</p>
+          <p>Task title: {taskTitle}</p>
+        </div>
+
+        <div className={styles.deleteAction}>
+          <button onClick={handleCancel}>Cancel</button>
+          <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
+        </div>
       </div>
     </div>
   );
