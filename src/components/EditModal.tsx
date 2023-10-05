@@ -51,8 +51,18 @@ const EditModal: React.FC<EditModalProps> = ({
           onChange={(e) => setNewTitle(e.target.value)}
         />
         <div className={styles.editAction}>
-          <button onClick={handleCloseModal}>Cancel</button>
-          <button onClick={handleEdit}>Edit</button>
+          <button
+            onClick={handleCloseModal}
+            style={{ background: "#363636", color: "#8687e7" }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleEdit}
+            style={{ background: "#8687e7", color: "#fff" }}
+          >
+            Edit
+          </button>
         </div>
       </div>
     </div>

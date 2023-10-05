@@ -22,7 +22,7 @@ const DeleteModalProps: React.FC<DeleteModalProps> = ({
         `https://dummyjson.com/todos/${taskId}`
       );
       if (response.data && response.data.isDeleted) {
-        onDelete(); // Gọi hàm onDelete từ props để cập nhật giao diện (hoặc làm bất cứ điều gì bạn muốn sau khi xóa thành công)
+        onDelete(); // Gọi hàm onDelete từ props để cập nhật giao diện
       }
     } catch (error) {
       console.error("Failed to delete the task", error);
@@ -36,22 +36,26 @@ const DeleteModalProps: React.FC<DeleteModalProps> = ({
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2 className={styles.titleModal}>Delete Task</h2>
-        <Image
-          src="/icon/divider.svg"
-          alt="divider"
-          width={24}
-          height={24}
-          className={styles.divider}
-        />
+        <h2>Delete Task</h2>
+        <hr className={styles.divider} />
         <div className={styles.wrapper}>
           <p>Are You sure you want to delete this task?</p>
           <p>Task title: {taskTitle}</p>
         </div>
 
         <div className={styles.deleteAction}>
-          <button onClick={handleCancel}>Cancel</button>
-          <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
+          <button
+            onClick={handleCancel}
+            style={{ background: "#363636", color: "#8687e7" }}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleDelete}
+            style={{ background: "#8687e7", color: "#fff" }}
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

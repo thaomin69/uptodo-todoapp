@@ -1,15 +1,16 @@
-import Image from 'next/image';
-import React from 'react';
-import styles from '../styles/Header.module.scss';
+import Image from "next/image";
+import React from "react";
+import styles from "../styles/Header.module.scss";
 
 export default function Header() {
+  console.log("header");
   return (
     <div>
       <header className={styles.header}>
         <div className={styles.icon}>
           <Image
             src="/icon/sort.svg"
-            alt='icon sort'
+            alt="icon sort"
             width={24}
             height={24}
             className={styles.sorticon}
@@ -20,7 +21,7 @@ export default function Header() {
           <Image
             className={styles.imgProfile}
             src="/img/avatar.png"
-            alt='profile image'
+            alt="profile image"
             width={24}
             height={24}
           />

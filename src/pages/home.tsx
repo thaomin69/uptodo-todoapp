@@ -53,24 +53,6 @@ export default function Index({
     setIsAddTaskModalOpen(true);
   };
 
-  const handleAddNewTask = (title: string) => {
-    axios
-      .post("https://dummyjson.com/todos/add", {
-        todo: title,
-        completed: false,
-        userId: 1,
-      })
-      .then((response) => {
-        const newTask: TaskType = response.data;
-        setIncompleteTasks([...incompleteTasks, newTask]);
-        setIsAddTaskModalOpen(false);
-        onAddModalClose();
-      })
-      .catch((error) => {
-        console.error("Error adding task:", error);
-      });
-  };
-
   return (
     <div className={styles.home}>
       <div className={styles.tasks}>
@@ -133,12 +115,6 @@ export default function Index({
           />
         )}
       </div>
-      {isAddTaskModalOpen && (
-        <AddModal
-          onAdd={handleAddNewTask}
-          onCancel={() => setIsAddTaskModalOpen(false)}
-        />
-      )}
     </div>
   );
 }

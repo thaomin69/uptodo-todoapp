@@ -9,7 +9,6 @@ interface FooterProps {
 }
 
 export default function Footer({ onAddClick }: { onAddClick: () => void }) {
-  
   return (
     <footer className={styles.footer}>
       {/* BEGIN: Icon left */}
